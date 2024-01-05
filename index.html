@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>نموذج طلب استفسار من قسم الرواتب</title>
+  <meta charset="utf-8">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+
+
+
+
+  <style>
+     body,
+    body * {
+      font-family: 'Alexandria', sans-serif !important;
+    }
+    body {
+      font-family: 'Alexandria', sans-serif;
+      direction: rtl;
+      /* If you want to set the text direction to right-to-left */
+    }
+
+    /* Additional styling adjustments */
+    .news_innerpg--title {
+      font-weight: 700;
+      font-family: 'Alexandria', sans-serif;
+    }
+
+    .form-control::placeholder {
+      font-family: 'Alexandria', sans-serif;
+
+    }
+
+    .btn {
+      font-family: 'Alexandria', sans-serif;
+    }
+
+    .form-control {
+      font-family: 'Alexandria', sans-serif;
+    }
+
+    .alert{
+      position: absolute;
+      bottom: 20px;
+      left: 10px;
+    }
+    /* Adjust other styles as needed */
+  </style>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div>
+
+
+    <div id="popupContainer"></div>
+    <section class="position-fixed bottom-0 start-0 bg-secondary-dark bg-opacity-50 h-100 w-100 overflow-auto" style="z-index: 50;">
+      <div class="d-flex flex-wrap align-items-center h-100">
+        <div class="container py-10">
+          <form class="p-10 mw-5xl mx-auto bg-light-light overflow-hidden rounded shadow">
+            <div class="mb-8 row g-8">
+              <h3 class="news_innerpg--title">طلب استفسار من قسم الرواتب</h3>
+
+
+              <div class=" row bg-light rounded-3 py-10  g-8">
+                <h2 class=" news_innerpg--title fs-10 fw-normal m-0  text-secondary">بينات اولية</h2>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-1">قمية المبلغ</label>
+                    <input class="form-control shadow " id="mony_num-v" type="text"
+                      placeholder="قمية المبلغ" >
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-2">عدد سنين الخدمة</label>
+                    <input class="form-control shadow" id="year_num-v" type="email" 
+                      placeholder="عدد سنين الخدمة">
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+
+
+              <div class=" row bg-light rounded-3 py-10  g-8">
+                <h2 class=" news_innerpg--title fs-10 fw-normal m-0  text-secondary">بينات مقدم الطلب </h2>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-1">الاسم</label>
+                    <input class="form-control shadow " id="name-v" type="text" 
+                      placeholder="الاسم">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-2">الرقم المدني</label>
+                    <input class="form-control shadow" id="num-mdany" type="email" 
+                      placeholder="الرقم المدني">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-3">التاريخ</label>
+                    <input class="form-control shadow" id="date-v" type="date" 
+                      placeholder="التاريخ">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-3">التوقيع</label>
+                    <input class="form-control shadow" id="segnitioner-v" type="text" 
+                      placeholder="التوقيع">
+                  </div>
+                </div>
+                <div class="col-12 ">
+                  <div class="form-group">
+                    <label class="mb-1 fw-medium text-light-dark" for="modalInput2-4">رقم الهاتف</label>
+                    <input class="form-control shadow" id="phonenum-v" type="text" 
+                      placeholder="رقم الهاتف">
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <a type="submit" class="btn btn-lg btn-success fs-11 py-3 w-100 text-success-light shadow"
+              id="button" >رؤية المستند</a>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="alert alert-danger w-25   " style="z-index: 50; display: none;" id="alert" role="alert">
+  من فضلك قم بادخال جميع البيانات
+  </div>
+
+
+
+
+
+
+
+
+<script src="/pdf/jspdf.umd.min.js"></script>
+<script src="/pdf/html2canvas.min.js"></script>
+  <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <title>استخراج البينات</title>
+    <style>
+
+    body,
+    body *{
+            font-family: Arial, Helvetica, sans-serif !important;
+            direction: rtl;
+        }
+
+        .container__print {
+            padding: 2%;
+            width: 620px;
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        span {
+            text-decoration: underline dotted;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+        button{
+            font-family: 'Alexandria', sans-serif !important;
+        }
+
+ .pdf {
+    position: absolute;
+   top: 56px;
+   border-radius: 20px;
+    width: 40%;
+    height: 90%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+ 
+
+    </style>
+ 
+   
+</head>
+
+
+
+<body>
+    <!-- Your HTML content goes here -->
+    <div class=" d-flex flex-column dd align-items-center justify-content-center ">
+    <div class="pdf d-flex rounded-10  flex-column user-select-none align-items-center justify-content-center ">
+    <div class="container__print">
+        <div style="font-family: Arial, sans-serif;" class="text-right mt-2">
+            <p class="h6">السيد مدير إدارة الشؤون الإدارية</p>
+
+            <div class="d-flex flex-row  justify-content-between ">
+                <p class="h6">وزارة المالية </p>
+                <p class="h6"> المحترم </p>
+            </div>
+
+            <p class="h6 mb-20">تحية طيبة وبعد ،،،،،،،،،،،،</p>
+            <p class="h4 text-center"><strong><u>الموضوع: طلب استبدال أثناء الخدم</u></strong></p>
+            <p class="">بالإشارة إلى الموضوع المبين أعلاه، يرجى التكرم بمخاطبة المؤسسة العامة للتأمينات الاجتماعية
+                لاستبدال (ما يسمح به القانون أو مبلغ <span id="mony_num"> ................... </span> د.ك ) من معاشي
+                التقاعدي
+                الافتراضي، حيث أن خدماتي في الوزارة تزيد عن <span id="year_num"> ...................</span> سنة.</p>
+            <p class="h6 mb-20 mt-20">تفضلوا بقبول فائق الاحترام ،،،</p>
+
+
+
+            <p class="h5 text-center  "><strong>مقدم الطلب</strong></p>
+            <div class="d-flex flex-column align-items-center  ">
+                <div class="mb-20">
+                    <p class="h6 text-end ">الاسم : <span id="name">...................</span></p>
+                    <p class="h6 text-end ">الرقم المدني : <span id="numder__md">...................</span></p>
+                    <p class="h6 text-end">التاريخ : <span id="date">25/12/2024</span></p>
+                    <p class="h6 text-end">التوقيع : <span id="segnitioner">...................</span></p>
+                    <p class="h6 text-end ">رقم الهاتف : <span id="phonenum">...................</span></p>
+                </div>
+            </div>
+
+            <p class="h6"><strong><u>المستندات المطلوبة:</u></strong></p>
+            <ul dir="rtl" class="list-unstyled">
+                <li dir="rtl"> ● صورة عن قرار التعيين</li>
+                <li dir="rtl"> ● صورة عن البطاقة المدنية</li>
+                <li dir="rtl">● صورة عن شهادة الجنسية</li>
+                <li dir="rtl"> ● صورة عن شهادات ميلاد الأبناء للموظف / صورة عن شهادة ميلاد أحد الأبناء للموظفة</li>
+                <li dir="rtl">● شهادة تفصيل راتب حديثة</li>
+                <li dir="rtl">● شهادة تحويل راتب حديثة من البنك</li>
+            </ul>
+        </div>
+        
+    </div>
+    <button id="export" onclick="convertToPDF()"  class="btn w-25 btn-success fs-11 py-3  text-success-light shadow"
+    >اسخراج</button>
+</div>
+    
+
+</div>
+
+   
+<script>
+
+
+
+
+
+function convertToPDF() {
+    // console.log("sdsd")
+
+    setTimeout(function() {
+        document.getElementById('export').textContent = " استخراج الملف"
+              
+              }, 15000);
+              document.getElementById('export').textContent = "جار التحميل"
+              
+
+        // Capture the content inside the .container__print element using html2canvas
+html2canvas(document.querySelector(".container__print")).then((canvas) => {
+  // Check if the canvas is rendered properly
+  if (!canvas || canvas.width === 0 || canvas.height === 0) {
+    console.error("الصورة لم تتم عملية التقاطها بشكل صحيح أو فارغة.");
+    return;
+  }
+
+  // Scale down the canvas
+  const scaleFactor = 0.75; // You can adjust this factor as needed
+  const scaledCanvas = document.createElement("canvas");
+  scaledCanvas.width = canvas.width * scaleFactor;
+  scaledCanvas.height = canvas.height * scaleFactor;
+
+  const ctx = scaledCanvas.getContext("2d");
+  ctx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
+
+  // Use the JPEG format to reduce the size of the data URL
+  const dataUrl = scaledCanvas.toDataURL("image/jpeg", 0.85); // You can adjust the quality as needed
+
+  // Create the PDF with the scaled dimensions
+  const pdf = new window.jspdf.jsPDF({
+    orientation: "p",
+    unit: "px",
+    format: [scaledCanvas.width, scaledCanvas.height],
+  });
+
+  try {
+    // Add the image to the PDF
+    pdf.addImage(
+      dataUrl,
+      "JPEG",
+      0,
+      0,
+      scaledCanvas.width,
+      scaledCanvas.height
+    );
+
+    // Save the PDF file with an appropriate name (in Arabic)
+    pdf.save("نموذج طلب استفسار من قسم الرواتب.pdf");
+  } catch (error) {
+    console.error("خطأ في إنشاء ملف PDF: ", error);
+  }
+});
+
+
+
+
+              
+//   html2canvas(document.querySelector(".container__print")).then((canvas) => {
+//     // Check if canvas is rendered properly
+//     if (!canvas || canvas.width === 0 || canvas.height === 0) {
+//       console.error("Canvas is not rendered properly or is empty.");
+//       return;
+//     }
+
+//     // Scale down the canvas
+//     const scaleFactor = 0.75; // Adjust this factor as needed
+//     const scaledCanvas = document.createElement("canvas");
+//     scaledCanvas.width = canvas.width * scaleFactor;
+//     scaledCanvas.height = canvas.height * scaleFactor;
+
+//     const ctx = scaledCanvas.getContext("2d");
+//     ctx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
+
+//     // Use JPEG format to reduce the size of the data URL
+//     const dataUrl = scaledCanvas.toDataURL("image/jpeg", 0.85); // Adjust quality as needed
+
+//     // Create the PDF with the scaled dimensions
+//     const pdf = new window.jspdf.jsPDF({
+//       orientation: "p",
+//       unit: "px",
+//       format: [scaledCanvas.width, scaledCanvas.height],
+//     });
+
+//     try {
+//       pdf.addImage(
+//         dataUrl,
+//         "JPEG",
+//         0,
+//         0,
+//         scaledCanvas.width,
+//         scaledCanvas.height
+//       );
+//       pdf.save("نموذج طلب استفسار من قسم الرواتب.pdf");
+//     } catch (error) {
+//       console.error("Error in generating PDF: ", error);
+//     }
+//   });
+
+
+}
+
+
+
+
+
+</script>
+
+
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/pdf/jspdf.umd.min.js"></script>
+    <script src="/pdf/html2canvas.min.js"></script>
+<script src="/js/main.js"></script> 
+</body>
+
+</html>
